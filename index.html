@@ -32,6 +32,7 @@
       <li><a href="#hero" onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">Home</a></li>
       <li><a href="#goals" onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">Goals</a></li>
       <li><a href="#contributions" onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">Contributions</a></li>
+      <li><a href="#news" onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">News</a></li>
       <li><a href="#people" onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">People</a></li>
     </ul>
     <button class="hamburger hidden sm:hidden flex-col gap-[5px] cursor-pointer bg-transparent border-none" id="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
@@ -70,10 +71,21 @@
         </div>
       </div>
     </div>
+    <a href="https://forms.gle/zj19z1WwhLpJVaqh9" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 bg-violet-700 text-white font-semibold text-sm rounded-lg hover:bg-violet-800 transition-colors">Join Us →</a>
+  </section>
+
+  <section id="news" class="py-8 px-8 max-w-5xl mx-auto">
+    <h2 class="text-[clamp(1.6rem,3.5vw,2.4rem)] font-bold tracking-tight text-heading mb-4">News</h2>
+    <ul class="mt-6 flex flex-col gap-4">
+      <li class="flex items-start gap-3">
+        <span class="shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full bg-violet-700"></span>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="text-base text-violet-700 hover:underline">Low-level open source contribution (coming soon...)</a>
+      </li>
+    </ul>
   </section>
 
   <!-- ─── Contributions ─────────────────────────────── -->
-  <section id="contributions" class="py-24 px-8 max-w-5xl mx-auto">
+  <section id="contributions" class="py-8 px-8 max-w-5xl mx-auto">
     <h2 class="text-[clamp(1.6rem,3.5vw,2.4rem)] font-bold tracking-tight text-heading mb-4">Community</h2>
     <p class="text-muted max-w-2xl text-lg">Our team contributes to well-known events/conferences.</p>
 
@@ -98,7 +110,7 @@
   </section>
 
   <!-- ─── People ────────────────────────────────────── -->
-  <section id="people" class="py-24 px-8 max-w-5xl mx-auto">
+  <section id="people" class="py-8 px-8 max-w-5xl mx-auto">
     <h2 class="text-[clamp(1.6rem,3.5vw,2.4rem)] font-bold tracking-tight text-heading mb-4">People</h2>
     <p class="text-muted max-w-2xl text-lg">Our people are across industry and academic field.</p>
 
@@ -131,7 +143,10 @@
         </div>
       </div>
     </div>
-  </section>
+    <div class="flex flex-col items-center mt-12">
+        <a href="https://forms.gle/zj19z1WwhLpJVaqh9" target="_blank" rel="noopener noreferrer" class="w-fit mt-4 inline-flex items-center gap-2 px-5 py-2.5 bg-violet-700 text-white font-semibold text-sm rounded-lg hover:bg-violet-800 transition-colors">Register to Join →</a>
+    </div>
+    </section>
 
   <!-- ─── Footer ────────────────────────────────────── -->
   <footer class="text-center py-12 px-8 text-sm text-neutral-400 border-t border-border">
