@@ -1,0 +1,34 @@
+/* ── Custom styles (things Tailwind CDN can't do inline) ── */
+
+/* Gradient text for hero heading */
+.hero-gradient {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9, #4c1d95);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Mobile hamburger nav */
+@media (max-width: 640px) {
+  .nav-links {
+    position: fixed;
+    inset: 0;
+    top: 64px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    background: rgba(245, 245, 240, 0.97);
+    backdrop-filter: blur(16px);
+    transform: translateX(100%);
+    transition: transform 0.35s ease;
+  }
+  .nav-links.open {
+    transform: translateX(0);
+  }
+  .nav-links a {
+    font-size: 1.2rem;
+  }
+  .hamburger {
+    display: flex !important;
+  }
+}

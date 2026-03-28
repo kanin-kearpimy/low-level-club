@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Low-Level Club Thailand</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#f5f5f0',
+            surface: '#ffffff',
+            border: '#e0e0da',
+            txt: '#2e2e38',
+            muted: '#6b6b76',
+            heading: '#1a1a24',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-bg text-txt font-['Inter',system-ui,sans-serif] leading-relaxed scroll-smooth">
+
+  <!-- ─── Navbar ────────────────────────────────────── -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 h-16 bg-bg/90 backdrop-blur-md border-b border-border">
+    <span class="font-bold text-lg tracking-tight">⚙ Low-Level Club</span>
+    <ul class="nav-links flex gap-7 list-none" id="navLinks">
+      <li><a href="#hero" onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">Home</a></li>
+      <li><a href="#goals" onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">Goals</a></li>
+      <li><a href="#contributions" onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">Contributions</a></li>
+      <li><a href="#people" onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">People</a></li>
+    </ul>
+    <button class="hamburger hidden sm:hidden flex-col gap-[5px] cursor-pointer bg-transparent border-none" id="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+      <span class="block w-[22px] h-[2px] bg-txt rounded-sm transition-all"></span>
+      <span class="block w-[22px] h-[2px] bg-txt rounded-sm transition-all"></span>
+      <span class="block w-[22px] h-[2px] bg-txt rounded-sm transition-all"></span>
+    </button>
+  </nav>
+
+  <!-- ─── Hero ──────────────────────────────────────── -->
+  <section id="hero" class="flex flex-col items-left justify-center text-center pt-24 px-8 max-w-5xl mx-auto">
+    <h1 class="text-left text-[clamp(2.4rem,6vw,4.2rem)] font-extrabold tracking-tight leading-tight">Low-Level Tech Thailand</h1>
+  </section>
+
+  <!-- ─── Goals ─────────────────────────────────────── -->
+  <section id="goals" class="px-8 max-w-5xl mx-auto">
+    <p class="text-muted max-w-2xl text-lg">We contribute to open source low-level technolog and create community for like-minded people who are interested in low-level technology</p>
+    <p class="max-w-2xl text-lg my-6">We currently fucuses on three technology.</p>
+    <div class="flex flex-col gap-2">
+      <div class="flex items-start gap-4">
+        <div class="shrink-0 w-2 h-2 mt-2.5 rounded-full bg-violet-700"></div>
+        <div>
+          <h3 class="text-base font-semibold text-heading mb-1">Compiler Engineering</h3>
+        </div>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="shrink-0 w-2 h-2 mt-2.5 rounded-full bg-violet-700"></div>
+        <div>
+          <h3 class="text-base font-semibold text-heading mb-1">Web Frameworks</h3>
+        </div>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="shrink-0 w-2 h-2 mt-2.5 rounded-full bg-violet-700"></div>
+        <div>
+          <h3 class="text-base font-semibold text-heading mb-1">Operating Systems</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Contributions ─────────────────────────────── -->
+  <section id="contributions" class="py-24 px-8 max-w-5xl mx-auto">
+    <h2 class="text-[clamp(1.6rem,3.5vw,2.4rem)] font-bold tracking-tight text-heading mb-4">Community</h2>
+    <p class="text-muted max-w-2xl text-lg">Our team contributes to well-known events/conferences.</p>
+
+    <div class="mt-10 flex flex-wrap gap-8 justify-center">
+      <div class="contrib-card group relative w-[200px] h-[200px] rounded-2xl bg-surface border border-border flex flex-col items-center justify-center cursor-pointer overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
+        <img src="https://th.pycon.org/images/common/2025/pyconth_logo@2x.png" alt="PyCon Thailand" class="w-16 h-16 object-contain transition-all duration-300" />
+        <span class="text-[0.7rem] font-semibold text-muted mt-2 tracking-wide transition-opacity duration-300">PyCon TH 2023, 2025</span>
+        <div class="contrib-overlay absolute inset-0 rounded-2xl bg-violet-700/[.92] flex flex-col items-center justify-center p-5 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <h3 class="text-base font-bold text-white mb-1">PyCon Thailand 2023, 2025</h3>
+          <p class="text-[0.82rem] text-white/85 leading-snug"><!-- ...text... --></p>
+        </div>
+      </div>
+      <div class="contrib-card group relative w-[200px] h-[200px] rounded-2xl bg-surface border border-border flex flex-col items-center justify-center cursor-pointer overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlrdocoof31v1IhRXdjQaetKhR-_3k0WjL9w&s" alt="JavaScript Bangkok" class="w-16 h-16 object-contain transition-all duration-300" />
+        <span class="text-[0.7rem] font-semibold text-muted mt-2 tracking-wide transition-opacity duration-300">Javascript Bangkok 2024</span>
+        <div class="contrib-overlay absolute inset-0 rounded-2xl bg-violet-700/[.92] flex flex-col items-center justify-center p-5 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <h3 class="text-base font-bold text-white mb-1">JavaScript Bangkok 2024</h3>
+          <p class="text-[0.82rem] text-white/85 leading-snug"><!-- ...text... --></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── People ────────────────────────────────────── -->
+  <section id="people" class="py-24 px-8 max-w-5xl mx-auto">
+    <h2 class="text-[clamp(1.6rem,3.5vw,2.4rem)] font-bold tracking-tight text-heading mb-4">People</h2>
+    <p class="text-muted max-w-2xl text-lg">Our people are across industry and academic field.</p>
+
+    <div class="mt-10 grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-6">
+
+      <div class="bg-surface border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-violet-700 hover:-translate-y-1 hover:shadow-md">
+        <img src="/assets/team/james.jpg" alt="(James) Kanin Kearpimy" class="w-full aspect-square object-cover bg-neutral-200" />
+        <div class="p-5">
+          <h3 class="text-base font-semibold text-heading">(James) Kanin Kearpimy</h3>
+          <!-- <p class="text-xs font-medium text-violet-700 mt-0.5">Founder / Lead</p> -->
+          <p class="text-sm text-muted mt-2">James passionates in compiler and low-level technology. He is software engineer at StrikeSocial. James is maintaining team of SPy compiler, variant of Python. As community contribution, he is co-chair of PyCon Thailand 2023, 2025.</p>
+        </div>
+      </div>
+
+      <div class="bg-surface border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-violet-700 hover:-translate-y-1 hover:shadow-md">
+        <img src="/assets/team/kirin.jpg" alt="Member Name" class="w-full aspect-square object-cover bg-neutral-200" />
+        <div class="p-5">
+          <h3 class="text-base font-semibold text-heading">Chakhriya Chantarakhami</h3>
+          <!-- <p class="text-xs font-medium text-violet-700 mt-0.5">Systems Engineer</p> -->
+          <p class="text-sm text-muted mt-2">Chakriya loves energy-efficient in open source technology.</p>
+        </div>
+      </div>
+
+      <div class="bg-surface border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-violet-700 hover:-translate-y-1 hover:shadow-md">
+        <img src="https://media.licdn.com/dms/image/v2/D5603AQFop4tCBzasKQ/profile-displayphoto-crop_800_800/B56Zu9R9bCKUAI-/0/1768407161745?e=1776297600&v=beta&t=NMZjRB2gT-9dqoG-kr3NUBMaZfVm1tem3iISA38yVX4" alt="Member Name" class="w-full aspect-square object-cover bg-neutral-200" />
+        <div class="p-5">
+          <h3 class="text-base font-semibold text-heading">Peeranat Ounhanan</h3>
+          <!-- <p class="text-xs font-medium text-violet-700 mt-0.5">Web Framework Engineer</p> -->
+          <p class="text-sm text-muted mt-2">Peeranat is senior cloud solution architect at Microsoft. He is also part of PyCon Thailand 2023, 2025 core team.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ────────────────────────────────────── -->
+  <footer class="text-center py-12 px-8 text-sm text-neutral-400 border-t border-border">
+    &copy; 2025 Low-Level Club Thailand. Built with passion for the fundamentals.
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
