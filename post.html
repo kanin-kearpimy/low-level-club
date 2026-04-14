@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article — Low-Level Club Thailand</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#f5f5f0',
+            surface: '#ffffff',
+            border: '#e0e0da',
+            txt: '#2e2e38',
+            muted: '#6b6b76',
+            heading: '#1a1a24',
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .prose h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; color: #1a1a24; margin-top: 0; margin-bottom: 1rem; line-height: 1.2; }
+    .prose h2 { font-size: 1.5rem; font-weight: 700; color: #1a1a24; margin-top: 2.5rem; margin-bottom: 0.75rem; }
+    .prose h3 { font-size: 1.2rem; font-weight: 600; color: #1a1a24; margin-top: 2rem; margin-bottom: 0.5rem; }
+    .prose p  { color: #2e2e38; line-height: 1.8; margin-bottom: 1.25rem; }
+    .prose ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; }
+    .prose ol { list-style: decimal; padding-left: 1.5rem; margin-bottom: 1.25rem; }
+    .prose li { margin-bottom: 0.35rem; color: #2e2e38; line-height: 1.7; }
+    .prose a  { color: #6d28d9; text-decoration: underline; text-underline-offset: 3px; }
+    .prose a:hover { color: #5b21b6; }
+    .prose code { background: #f0f0eb; padding: 0.15rem 0.4rem; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 0.875em; color: #1a1a24; }
+    .prose pre  { background: #1e1e2e; color: #cdd6f4; padding: 1.25rem; border-radius: 0.75rem; overflow-x: auto; margin-bottom: 1.5rem; }
+    .prose pre code { background: transparent; padding: 0; color: inherit; font-size: 0.875rem; }
+    .prose blockquote { border-left: 3px solid #6d28d9; padding-left: 1rem; margin-left: 0; color: #6b6b76; font-style: italic; margin-bottom: 1.25rem; }
+    .prose img  { max-width: 100%; border-radius: 0.75rem; margin: 1.5rem 0; }
+    .prose hr   { border: none; border-top: 1px solid #e0e0da; margin: 2.5rem 0; }
+    .prose table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 0.95rem; }
+    .prose th, .prose td { border: 1px solid #e0e0da; padding: 0.5rem 0.75rem; text-align: left; }
+    .prose th { background: #f5f5f0; font-weight: 600; color: #1a1a24; }
+    .prose strong { font-weight: 600; color: #1a1a24; }
+  </style>
+</head>
+<body class="bg-bg text-txt font-['Inter',system-ui,sans-serif] leading-relaxed">
+
+  <!-- ─── Navbar ─────────────────────────────────────── -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 h-16 bg-bg/90 backdrop-blur-md border-b border-border">
+    <a href="/" class="font-bold text-lg tracking-tight">⚙ Low-Level Club</a>
+    <ul class="nav-links flex gap-7 list-none" id="navLinks">
+      <li><a href="/#hero"          onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">Home</a></li>
+      <li><a href="/#goals"         onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">Goals</a></li>
+      <li><a href="/#contributions" onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">Contributions</a></li>
+      <li><a href="/#news"          onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">News</a></li>
+      <li><a href="/#people"        onclick="closeMenu()" class="text-sm font-medium text-muted hover:text-txt transition-colors">People</a></li>
+    </ul>
+    <button class="hamburger hidden sm:hidden flex-col gap-[5px] cursor-pointer bg-transparent border-none" id="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+      <span class="block w-[22px] h-[2px] bg-txt rounded-sm transition-all"></span>
+      <span class="block w-[22px] h-[2px] bg-txt rounded-sm transition-all"></span>
+      <span class="block w-[22px] h-[2px] bg-txt rounded-sm transition-all"></span>
+    </button>
+  </nav>
+
+  <!-- ─── Article ────────────────────────────────────── -->
+  <main class="pt-28 pb-24 px-8 max-w-3xl mx-auto">
+    <a href="/" class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-txt transition-colors mb-10">
+      ← Back to home
+    </a>
+    <div id="article-content">
+      <p class="text-muted">Loading…</p>
+    </div>
+  </main>
+
+  <!-- ─── Footer ─────────────────────────────────────── -->
+  <footer class="text-center py-12 px-8 text-sm text-neutral-400 border-t border-border">
+    &copy; 2025 Low-Level Club Thailand. Built with passion for the fundamentals.
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('slug') || '';
+
+      // Only allow alphanumeric slugs with hyphens — prevents path traversal
+      if (!slug || !/^[a-z0-9-]+$/.test(slug)) {
+        document.getElementById('article-content').innerHTML =
+          '<h1 class="text-2xl font-bold text-heading mb-4">Article not found</h1>' +
+          '<p class="text-muted">No article slug was provided. <a class="text-violet-700 underline" href="/">Go home</a></p>';
+        return;
+      }
+
+      fetch('/src/data/posts/' + slug + '.md')
+        .then(function (res) {
+          if (!res.ok) throw new Error('Not found');
+          return res.text();
+        })
+        .then(function (text) {
+          const html = marked.parse(text);
+          const container = document.getElementById('article-content');
+          container.innerHTML = '<article class="prose">' + html + '</article>';
+
+          // Update page title from first H1
+          const h1 = container.querySelector('h1');
+          if (h1) document.title = h1.textContent + ' — Low-Level Club Thailand';
+        })
+        .catch(function () {
+          document.getElementById('article-content').innerHTML =
+            '<h1 class="text-2xl font-bold text-heading mb-4">Article not found</h1>' +
+            '<p class="text-muted">The article <code class="bg-neutral-100 px-1.5 py-0.5 rounded text-sm">' +
+            slug + '</code> does not exist. <a class="text-violet-700 underline" href="/">Go home</a></p>';
+        });
+    })();
+  </script>
+</body>
+</html>
