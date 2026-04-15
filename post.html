@@ -4,6 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Article — Low-Level Club Thailand</title>
+  <meta property="og:site_name" content="Low-Level Club Thailand" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Article — Low-Level Club Thailand" />
+  <meta property="og:description" content="A community for low-level tech enthusiasts in Thailand" />
+  <meta property="og:image" content="https://www.lowlevelclubth.com/assets/lltc.png" />
+  <meta property="og:url" content="https://lowlevelclub.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Article — Low-Level Club Thailand" />
+  <meta name="twitter:description" content="A community for low-level tech enthusiasts in Thailand" />
+  <meta name="twitter:image" content="https://www.lowlevelclubth.com/assets/lltc.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -87,6 +97,7 @@
     <div id="article-content">
       <p class="text-muted">Loading…</p>
     </div>
+    <div id="author-section"></div>
   </main>
 
   <!-- ─── Footer ─────────────────────────────────────── -->
@@ -136,16 +147,74 @@
           return res.text();
         })
         .then(function (text) {
-          const html = marked.parse(text);
+          // Parse frontmatter between leading --- delimiters
+          var fm = {};
+          var body = text;
+          var fmMatch = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+          if (fmMatch) {
+            fmMatch[1].split(/\r?\n/).forEach(function (line) {
+              var idx = line.indexOf(':');
+              if (idx === -1) return;
+              var key = line.slice(0, idx).trim();
+              var val = line.slice(idx + 1).trim().replace(/^["']|["']$/g, '');
+              fm[key] = val;
+            });
+            body = fmMatch[2];
+          }
+
+          const html = marked.parse(body);
           const container = document.getElementById('article-content');
           container.innerHTML = '<article class="prose">' + html + '</article>';
           container.querySelectorAll('pre code').forEach(function (el) {
             hljs.highlightElement(el);
           });
 
-          // Update page title from first H1
+          // Title: frontmatter > first H1 > fallback
           const h1 = container.querySelector('h1');
-          if (h1) document.title = h1.textContent + ' — Low-Level Club Thailand';
+          const rawTitle = fm.title || (h1 ? h1.textContent : 'Article');
+          const title = rawTitle + ' — Low-Level Club Thailand';
+          document.title = title;
+
+          // Description: frontmatter > first paragraph
+          const firstP = container.querySelector('p');
+          const description = fm.description || (firstP ? firstP.textContent.slice(0, 160) : 'Low-Level Club Thailand');
+
+          // Image: frontmatter > first img in article
+          var image = fm.image || '';
+          if (!image) {
+            var firstImg = container.querySelector('img');
+            image = firstImg ? firstImg.src : 'https://www.lowlevelclubth.com/assets/lltc.png';
+          }
+
+          const pageUrl = window.location.href;
+
+          function setMeta(sel, attr, val) {
+            var el = document.querySelector(sel);
+            if (el) el.setAttribute(attr, val);
+          }
+          setMeta('meta[property="og:title"]',       'content', title);
+          setMeta('meta[property="og:description"]', 'content', description);
+          setMeta('meta[property="og:image"]',       'content', image);
+          setMeta('meta[property="og:url"]',         'content', pageUrl);
+          setMeta('meta[name="twitter:title"]',      'content', title);
+          setMeta('meta[name="twitter:description"]','content', description);
+          setMeta('meta[name="twitter:image"]',      'content', image);
+
+          // Author card
+          if (fm.author) {
+            var authorHtml = '<div class="mt-16 pt-8 border-t border-border flex items-start gap-5">';
+            if (fm.author_image) {
+              authorHtml += '<img src="' + fm.author_image + '" alt="' + fm.author + '" class="shrink-0 w-16 h-16 rounded-full object-cover bg-neutral-200" />';
+            }
+            authorHtml += '<div>';
+            authorHtml += '<p class="text-xs font-semibold uppercase tracking-widest text-muted mb-1">Written by</p>';
+            authorHtml += '<p class="text-base font-semibold text-heading">' + fm.author + '</p>';
+            if (fm.author_bio) {
+              authorHtml += '<p class="text-sm text-muted mt-1 leading-relaxed">' + fm.author_bio + '</p>';
+            }
+            authorHtml += '</div></div>';
+            document.getElementById('author-section').innerHTML = authorHtml;
+          }
         })
         .catch(function () {
           document.getElementById('article-content').innerHTML =

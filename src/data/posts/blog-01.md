@@ -1,6 +1,13 @@
 ---
-PL Series Ep. 1: Introduction to Programming Language
+title: "PL Series Ep. 1: Introduction to Programming Language"
+description: "Tracing the abstraction ladder from transistors and Assembly to C and Python — and how every line of code is lowered to binary instructions the CPU executes."
+image: "https://www.lowlevelclubth.com/assets/lltc.png"
+author: "(James) Kanin Kearpimy"
+author_image: "/assets/team/james.jpg"
+author_bio: "James is passionate about compiler and low-level technology. He is a software engineer at StrikeSocial, maintaining the SPy compiler — a variant of Python. He is also co-chair of PyCon Thailand 2023 and 2025."
+date: "2026-04-15"
 ---
+## PL Series Ep. 1: Introduction to Programming Language
 
 Programming language is human platform to control computer. From binary instruction to high-level language, Python, they are all packed together to faciliate human desire and economy-driven machine.
 
